@@ -1,2 +1,2 @@
 # DFvT
-Code, training logs and pretrained models for DFvT
+Code, training logs and pretrained models for DFvT 
