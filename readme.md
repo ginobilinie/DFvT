@@ -1,12 +1,18 @@
 # DFvT for Image Classification
+
+Official implementation of "Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation".
+
+Accepted by ECCV 2022.
+
+> Authors: Li Gao, Dong Nie, Bo Li, Xiaofeng Ren.
+
 ## Model Zoo
 
-| model  | Top-1 Acc.(%)  |#Params(M)| FLOPs(G) | Link
-| :----: |:----: | :----: |:----: |:----: | :----: |
-| DFvT-Tiny  |  72.95 |4.0|0.3|[model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_T_7295.pth)/[log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_T_log.txt)
-| DFvT-Small  | 78.29 |11.2|0.8|[model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_S_7829.pth)/[log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_S_log.txt)
-|DFvT-Base|81.98|37.3|2.5|[model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_B_8198.pth)/[log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_B_log.txt)
-
+|  model       | Top-1 Acc.(%) | #Params(M) | FLOPs(G)  | Link   |
+| :-----------:  | :---------: | :----------: | :---------: | :----------: |
+| DFvT-Tiny  | 72.95     | 4.0   | 0.3     | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_T_7295.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_T_log.txt) |
+| DFvT-Small| 78.29    | 11.2    | 0.8    | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_S_7829.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_S_log.txt)   |
+| DFvT-Base  | 81.98   | 37.3      | 2.5    | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_B_8198.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_B_log.txt)|
 ## Prerequisite
 >Creat a new conda environment
 
@@ -86,4 +92,14 @@ python -m torch.distributed.launch --nproc_per_node 1 --master_port 12345  main.
 ```
 
 ## License
-The code is heavily borrowed from [Swin-Transformer](https://github.com/microsoft/Swin-Transformer)
+The code is heavily borrowed from [Swin-Transformer](https://github.com/microsoft/Swin-Transformer).
+
+If you use this code in your research please consider citing
+```
+@inproceedings{gao2022dfvt,
+  title={Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation},
+  author={Gao, Li and Nie, Dong and Li, Bo and Ren, Xiaofeng},
+  booktitle={Proceedings of the European Conference on Computer Vision},
+  year={2022}
+}
+```
