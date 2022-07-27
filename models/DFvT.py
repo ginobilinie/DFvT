@@ -468,7 +468,6 @@ class ConvBlock(nn.Module):
                  input_resolution,
                  inplanes,
                  stride,
-                 model_size,
                  groups=1,
                  norm_layer=nn.BatchNorm2d):
         super(ConvBlock, self).__init__()
@@ -505,11 +504,7 @@ class ConvBlock(nn.Module):
                 nn.SiLU(inplace=True)
         )
 
-        self.model_size = model_size
-        if model_size == 'tiny':
-            self.conv1  = convdw(inplanes, inplanes, stride)
-        else:
-            self.conv1 = nn.Sequential(
+        self.conv1 = nn.Sequential(
                 nn.Conv2d(inplanes,
                          inplanes,
                          kernel_size=3,
@@ -561,19 +556,6 @@ class ConvBlock(nn.Module):
         else:
             flops +=  Ho * Wo * self.inplanes * 9 + Ho * Wo * self.inplanes
 
-        #conv3x3
-        '''if self.model_size != 'tiny':
-            if self.stride == 2:
-                flops += Ho/2 * Wo/2 * self.inplanes * 9 * self.inplanes + Ho/2 * Wo/2 * self.inplanes 
-            else:
-                flops += Ho * Wo * self.inplanes * 9 * self.inplanes + Ho * Wo * self.inplanes 
-        else:
-            if self.stride == 2:
-                flops += Ho/2 * Wo/2 * self.inplanes * 9 + Ho/2 * Wo/2 * self.inplanes * self.inplanes + 2 * Ho/2 * Wo/2 * self.inplanes 
-            else:
-                flops += Ho * Wo * self.inplanes * 9 + Ho * Wo * self.inplanes * self.inplanes + 2 * Ho * Wo * self.inplanes'''
-        
-
         #conv1x1_2
         if self.stride == 2:
             flops += Ho/2 * Wo/2 * self.inplanes * self.inplanes + Ho/2 * Wo/2 * self.inplanes
@@ -590,7 +572,7 @@ class ConvBlock(nn.Module):
 class DFvT(nn.Module):
 
     def __init__(self, img_size=224, patch_size=4, in_chans=3, num_classes=1000,
-                 embed_dim=96, depths=[2, 2, 6, 2], num_heads=[3, 6, 12, 24], model_size = 'medium',
+                 embed_dim=96, depths=[2, 2, 6, 2], num_heads=[3, 6, 12, 24],
                  window_size=7, mlp_ratio=4., qkv_bias=True, qk_scale=None,
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0.1,
                  norm_layer=nn.LayerNorm, ape=False, patch_norm=True,
@@ -644,7 +626,6 @@ class DFvT(nn.Module):
         self.convlayers = nn.ModuleList()
         for i_layer in range(self.num_layers):
             layer = ConvBlock(inplanes = embed_dim * 2 ** i_layer,
-            model_size = model_size,
             stride = 2 if i_layer < self.num_layers - 1 else 1,
             input_resolution=(patches_resolution[0] // (2 ** i_layer),
                                   patches_resolution[1] // (2 ** i_layer)))
