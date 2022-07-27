@@ -1,11 +1,3 @@
-# --------------------------------------------------------
-# Swin Transformer
-# Copyright (c) 2021 Microsoft
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Ze Liu
-# --------------------------------------------------------
-
-
 from .DFvT import DFvT
 
 
@@ -28,10 +20,8 @@ def build_model(config):
                                 drop_path_rate=config.MODEL.DROP_PATH_RATE,
                                 ape=config.MODEL.DFvT.APE,
                                 patch_norm=config.MODEL.DFvT.PATCH_NORM,
-                                use_checkpoint=config.TRAIN.USE_CHECKPOINT,
-                                model_size = config.MODEL.DFvT.SIZE)
+                                use_checkpoint=config.TRAIN.USE_CHECKPOINT)
     else:
         raise NotImplementedError(f"Unkown model: {model_type}")
 
     return model
-

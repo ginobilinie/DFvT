@@ -206,7 +206,7 @@ class TransformerBlock(nn.Module):
         self.window_size = window_size
         self.shift_size = shift_size
         self.mlp_ratio = mlp_ratio
-        
+
         self.select = DANE(channel = self.dim)
         if min(self.input_resolution) <= self.window_size:
             # if window size is larger than input resolution, we don't partition windows
@@ -284,7 +284,7 @@ class TransformerBlock(nn.Module):
         # FFN
         x = shortcut + self.drop_path(x)
 
-        
+
         x = self.select(x, x_cnn)
 
         x = x + self.drop_path(self.mlp(self.norm2(x)))
@@ -683,11 +683,11 @@ class DFvT(nn.Module):
             if i < self.num_layers - 1:
                 x_downsample = self.maxpool(x)
 
-                x0 = x_dw[:, :, 0::2, 0::2]  # B C H/2 W/2 
-                x1 = x_dw[:, :, 1::2, 0::2]  # B C H/2 W/2 
-                x2 = x_dw[:, :, 0::2, 1::2]  # B C H/2 W/2 
-                x3 = x_dw[:, :, 1::2, 1::2]  # B C H/2 W/2 
-                x_dw = torch.cat([x0, x1, x2, x3], 1)  # B 4*C H/2 W/2 
+                x0 = x_dw[:, :, 0::2, 0::2]  # B C H/2 W/2
+                x1 = x_dw[:, :, 1::2, 0::2]  # B C H/2 W/2
+                x2 = x_dw[:, :, 0::2, 1::2]  # B C H/2 W/2
+                x3 = x_dw[:, :, 1::2, 1::2]  # B C H/2 W/2
+                x_dw = torch.cat([x0, x1, x2, x3], 1)  # B 4*C H/2 W/2
                 x_dw = x_dw.view(B, 4 * C, int(math.sqrt(L))//2, int(math.sqrt(L))//2)
                 x_dw = self.multiresolution_conv[i](x_dw)
                 x_dw = x_dw.flatten(2).transpose(1, 2)
