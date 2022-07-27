@@ -63,7 +63,6 @@ _C.MODEL.DFvT.QKV_BIAS = True
 _C.MODEL.DFvT.QK_SCALE = None
 _C.MODEL.DFvT.APE = False
 _C.MODEL.DFvT.PATCH_NORM = True
-_C.MODEL.DFvT.SIZE = 'medium'
 
 # -----------------------------------------------------------------------------
 # Training settings
@@ -183,10 +182,6 @@ def update_config(config, args):
     _update_config_from_file(config, args.cfg)
 
     config.defrost()
-    if args.cfg[8:] == 'tiny.yaml':
-        config.MODEL.DFvT.SIZE = 'tiny'
-    elif args.cfg[8:] == 'large.yaml':
-        config.MODEL.DFvT.SIZE = 'large'
     if args.opts:
         config.merge_from_list(args.opts)
 
