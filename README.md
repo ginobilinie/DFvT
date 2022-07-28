@@ -1,8 +1,7 @@
-# DFvT for Image Classification
+# [ECCV 2022] DFvT for Image Classification
 
 Official implementation of "Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation".
 
-Accepted by ECCV 2022.
 
 > Authors: Li Gao, Dong Nie, Bo Li, Xiaofeng Ren.
 
