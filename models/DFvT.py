@@ -23,7 +23,7 @@ class Mlp(nn.Module):
         x = self.drop(x)
         return x
 
-def convdw(in_channels, out_channels, stride):
+def conv_separable(in_channels, out_channels, stride):
         return nn.Sequential(
             nn.Conv2d(in_channels, in_channels, kernel_size=3, stride=stride, padding=1, groups=in_channels, bias=False),
             nn.BatchNorm2d(in_channels),
@@ -633,7 +633,7 @@ class DFvT(nn.Module):
 
         self.multiresolution_conv = nn.ModuleList()
         for i_layer in range(self.num_layers-1):
-            layer = convdw(4 * embed_dim * 2 ** i_layer, embed_dim * 2 ** i_layer, 1)
+            layer = conv_separable(4 * embed_dim * 2 ** i_layer, embed_dim * 2 ** i_layer, 1)
             self.multiresolution_conv.append(layer)
 
 
