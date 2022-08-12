@@ -102,3 +102,6 @@ If you use this code in your research please consider citing
   year={2022}
 }
 ```
+## Other Links
+
+> **Object-Detection**: See [DFvT for Object Detection](https://github.com/ginobilinie/DFvT/tree/Object-Detection).
