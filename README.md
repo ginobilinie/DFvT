@@ -9,9 +9,9 @@ Official implementation of "Doubly-Fused ViT: Fuse Information from Vision Trans
 
 |  model       | Top-1 Acc.(%) | #Params(M) | FLOPs(G)  | Link   |
 | :-----------:  | :---------: | :----------: | :---------: | :----------: |
-| DFvT-Tiny  | 72.95     | 4.0   | 0.3     | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_T_7295.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_T_log.txt) |
-| DFvT-Small| 78.29    | 11.2    | 0.8    | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_S_7829.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_S_log.txt)   |
-| DFvT-Base  | 81.98   | 37.3      | 2.5    | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_B_8198.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_B_log.txt)|
+| DFvT-Tiny  | 72.95     | 4.0   | 0.3     | [model](https://github.com/ginobilinie/DFvT/releases/download/Classification/DFvT_T_7295.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/Classification/DFvT_T_log.txt) |
+| DFvT-Small| 78.29    | 11.2    | 0.8    | [model](https://github.com/ginobilinie/DFvT/releases/download/Classification/DFvT_S_7829.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/Classification/DFvT_S_log.txt)   |
+| DFvT-Base  | 81.98   | 37.3      | 2.5    | [model](https://github.com/ginobilinie/DFvT/releases/download/Classification/DFvT_B_8198.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/Classification/DFvT_B_log.txt)|
 ## Prerequisite
 >Creat a new conda environment
 
