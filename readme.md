@@ -1,100 +1,87 @@
-# DFvT for Image Classification
+# DFvT for Object Detection
 
-Official implementation of "Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation".
+This repo contains the supported code and configuration files to reproduce object detection results of [DFvT](https://github.com/ginobilinie/DFvT). It is based on [mmdetection](https://github.com/open-mmlab/mmdetection).
 
-Accepted by ECCV 2022.
+## Results and Models
 
-> Authors: Li Gao, Dong Nie, Bo Li, Xiaofeng Ren.
+### Mask R-CNN
 
-## Model Zoo
+| Backbone | Pretrained model | Lr Schd | box mAP | mask mAP | #params | FLOPs | config | log | model |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |:---: |
+| DFvT-T | [model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model/DFvT_tiny_coco_pretrained.pth) | 1x | 34.8 | 32.6 | 25M | 178G | [config](configs/DFvT/maskrcnn_DFvT_tiny_1x_coco.py) | [log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/log_tiny_1x_coco.txt) | [oss](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/DFvT_tiny_for_coco.pth) |
+| DFvT-S| [model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model/DFvT_small_coco_pretrained.pth) | 1x | 39.2 | 36.3 | 32M | 198G | [config](configs/DFvT/maskrcnn_DFvT_small_1x_coco.py) | [log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/log_DFvT_small_coco1x.txt)| [oss](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/DFvT_small_for_coco.pth ) |
+| DFvT-B | [model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model/DFvT_base_coco_pretrained.pth) | 1x | 43.4 | 39.0 | 58M | 242G | [config](configs/DFvT/maskrcnn_DFvT_base_1x_coco.py) | [log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/log_DFvT_base_coco1x.txt)| [oss](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/DFvT_base_for_coco.pth)|
 
-|  model       | Top-1 Acc.(%) | #Params(M) | FLOPs(G)  | Link   |
-| :-----------:  | :---------: | :----------: | :---------: | :----------: |
-| DFvT-Tiny  | 72.95     | 4.0   | 0.3     | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_T_7295.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_T_log.txt) |
-| DFvT-Small| 78.29    | 11.2    | 0.8    | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_S_7829.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_S_log.txt)   |
-| DFvT-Base  | 81.98   | 37.3      | 2.5    | [model](https://github.com/ginobilinie/DFvT/releases/download/models/DFvT_B_8198.pth)/[log](https://github.com/ginobilinie/DFvT/releases/download/logs/DFvT_B_log.txt)|
-## Prerequisite
->Creat a new conda environment
 
+
+
+### Installation
+
+Please refer to [get_started.md](https://github.com/open-mmlab/mmdetection/blob/master/docs/en/get_started.md) for installation and dataset preparation.
+For your convenience, I provide my own environment (anaconda) for reference:
 ```
-conda create -n DFvT python=3.7 -y
-conda activate DFvT
-conda install pytorch==1.7.1 torchvision==0.8.2 cudatoolkit=10.1 -c pytorch
-pip install timm==0.3.2 opencv-python==4.4.0.46 termcolor==1.1.0 yacs==0.1.8
-
+Python: 3.7.10
+PyTorch: 1.7.1
+TorchVision: 0.8.2
+OpenCV: 4.5.2
+MMCV: 1.3.17
+MMDetection: 2.11.0
 ```
->install Apex
 
+### Training
+
+To train a detector with pre-trained models, run:
+```
+# single-gpu training
+python tools/train.py <CONFIG_FILE> --cfg-options model.pretrained=<PRETRAIN_MODEL> [model.backbone.use_checkpoint=True] [other optional arguments]
+
+# multi-gpu training
+tools/dist_train.sh <CONFIG_FILE> <GPU_NUM> --cfg-options model.pretrained=<PRETRAIN_MODEL> [model.backbone.use_checkpoint=True] [other optional arguments]
+```
+For example, to train a Mask R-CNN model with a `DFvT-B` backbone and 4 gpus, run:
+```
+tools/dist_train.sh configs/DFvT/maskrcnn_DFvT_base_1x_coco.py 4 --cfg-options model.pretrained=./DFvT_base_coco_pretrained.pth
+```
+
+### Inference
+```
+# single-gpu testing
+python tools/test.py <CONFIG_FILE> <DET_CHECKPOINT_FILE> --eval bbox segm
+
+# multi-gpu testing
+tools/dist_test.sh <CONFIG_FILE> <DET_CHECKPOINT_FILE> <GPU_NUM> --eval bbox segm
+```
+For example, to test a Mask R-CNN model with a `DFvT-B` backbone and 4 gpus, run:
+```
+tools/dist_test.sh configs/DFvT/maskrcnn_DFvT_base_1x_coco.py ./DFvT_base_for_coco.pth 4 --eval bbox segm
+```
+
+
+
+
+
+### Apex (optional):
+We use apex for mixed precision training by default. To install apex, run:
 ```
 git clone https://github.com/NVIDIA/apex
 cd apex
 pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 ```
-
->Prepare dataset
-
-Download ImageNet-1K dataset from http://image-net.org/, then organize the folder as follows:
-
+If you would like to disable apex, modify the type of runner as `EpochBasedRunner` and comment out the following code block in the [configuration files](configs/swin):
 ```
-imagenet
-├── train
-│   ├── class1
-│   │   ├── img1.jpeg
-│   │   ├── img2.jpeg
-│   │   └── ...
-│   ├── class2
-│   │   ├── img3.jpeg
-│   │   └── ...
-│   └── ...
-└── val
-    ├── class1
-    │   ├── img4.jpeg
-    │   ├── img5.jpeg
-    │   └── ...
-    ├── class2
-    │   ├── img6.jpeg
-    │   └── ...
-    └── ...
-
-
+# do not use mmdet version fp16
+fp16 = None
+optimizer_config = dict(
+    type="DistOptimizerHook",
+    update_interval=1,
+    grad_clip=None,
+    coalesce=True,
+    bucket_size_mb=-1,
+    use_fp16=True,
+)
 ```
 
-## Training and Evaluation example
-
-### Training from scratch
-```
-python -m torch.distributed.launch --nproc_per_node <num-of-gpus-to-use> --master_port 12345  main.py \ 
---cfg <config-file> --data-path <imagenet-path> [--batch-size <batch-size-per-gpu> --output <output-directory> --tag <job-tag>]
-```
-For example, to evaluate the DFvT-S with 4 GPU:
-```
-python -m torch.distributed.launch --nproc_per_node 4 --master_port 12345  main.py \
---cfg configs/small.yaml --data-path <imagenet-path> --batch-size 256
-```
-
-### Evaluation
-
-To evaluate a pre-trained DFvT on ImageNet val, run:
-```
-python -m torch.distributed.launch --nproc_per_node <num-of-gpus-to-use> --master_port 12345 main.py --eval \
---cfg <config-file> --resume <checkpoint> --data-path <imagenet-path> 
-```
-For example, to evaluate the DFvT-S with a single GPU:
-```
-python -m torch.distributed.launch --nproc_per_node 1 --master_port 12345 main.py --eval \
---cfg configs/small.yaml --resume DFvT_S_7829.pth --data-path <imagenet-path>
-```
-### Throughput
-
-```
-python -m torch.distributed.launch --nproc_per_node 1 --master_port 12345  main.py \
---cfg <config-file> --data-path <imagenet-path> --batch-size 64 --throughput --amp-opt-level O0
-```
-
-## License
-The code is heavily borrowed from [Swin-Transformer](https://github.com/microsoft/Swin-Transformer).
-
-If you use this code in your research please consider citing
+## Citing DFvT
 ```
 @inproceedings{gao2022dfvt,
   title={Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation},
@@ -103,3 +90,9 @@ If you use this code in your research please consider citing
   year={2022}
 }
 ```
+
+## Other Links
+
+> **Image Classification**: See [DFvT for Image Classification](https://github.com/ginobilinie/DFvT).
+
+> **Semantic Segmentation**: See [DFvT for Semantic Segmentation](https://github.com/SwinTransformer/Swin-Transformer-Semantic-Segmentation).
