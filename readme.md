@@ -8,9 +8,9 @@ This repo contains the supported code and configuration files to reproduce objec
 
 | Backbone | Pretrained model | Lr Schd | box mAP | mask mAP | #params | FLOPs | config | log | model |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |:---: |
-| DFvT-T | [model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model/DFvT_tiny_coco_pretrained.pth) | 1x | 34.8 | 32.6 | 25M | 178G | [config](configs/DFvT/maskrcnn_DFvT_tiny_1x_coco.py) | [log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/log_tiny_1x_coco.txt) | [oss](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/DFvT_tiny_for_coco.pth) |
-| DFvT-S| [model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model/DFvT_small_coco_pretrained.pth) | 1x | 39.2 | 36.3 | 32M | 198G | [config](configs/DFvT/maskrcnn_DFvT_small_1x_coco.py) | [log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/log_DFvT_small_coco1x.txt)| [oss](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/DFvT_small_for_coco.pth ) |
-| DFvT-B | [model](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model/DFvT_base_coco_pretrained.pth) | 1x | 43.4 | 39.0 | 58M | 242G | [config](configs/DFvT/maskrcnn_DFvT_base_1x_coco.py) | [log](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/log_DFvT_base_coco1x.txt)| [oss](http://hadmap.cn-beijing-gaode-b.oss.aliyun-inc.com/dong.nie/gaolili/DFvT_pretrained_model_and_logs_for_coco/DFvT_base_for_coco.pth)|
+| DFvT-T | [model](https://github.com/ginobilinie/DFvT/releases/download/Detection/DFvT_tiny_coco_pretrained.pth) | 1x | 34.8 | 32.6 | 25M | 178G | [config](configs/DFvT/maskrcnn_DFvT_tiny_1x_coco.py) | [log](https://github.com/ginobilinie/DFvT/releases/download/Detection/log_DFvT_tiny_coco1x.txt) | [github](https://github.com/ginobilinie/DFvT/releases/download/Detection/DFvT_tiny_for_coco.pth) |
+| DFvT-S| [model](https://github.com/ginobilinie/DFvT/releases/download/Detection/DFvT_small_coco_pretrained.pth) | 1x | 39.2 | 36.3 | 32M | 198G | [config](configs/DFvT/maskrcnn_DFvT_small_1x_coco.py) | [log](https://github.com/ginobilinie/DFvT/releases/download/Detection/log_DFvT_small_coco1x.txt)| [github](https://github.com/ginobilinie/DFvT/releases/download/Detection/DFvT_small_for_coco.pth ) |
+| DFvT-B | [model](https://github.com/ginobilinie/DFvT/releases/download/Detection/DFvT_base_coco_pretrained.pth) | 1x | 43.4 | 39.0 | 58M | 242G | [config](configs/DFvT/maskrcnn_DFvT_base_1x_coco.py) | [log](https://github.com/ginobilinie/DFvT/releases/download/Detection/log_DFvT_base_coco1x.txt)| [github](https://github.com/ginobilinie/DFvT/releases/download/Detection/DFvT_base_for_coco.pth)|
 
 
 
@@ -95,4 +95,4 @@ optimizer_config = dict(
 
 > **Image Classification**: See [DFvT for Image Classification](https://github.com/ginobilinie/DFvT).
 
-> **Semantic Segmentation**: See [DFvT for Semantic Segmentation](https://github.com/SwinTransformer/Swin-Transformer-Semantic-Segmentation).
+
