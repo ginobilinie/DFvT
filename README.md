@@ -95,11 +95,18 @@ The code is heavily borrowed from [Swin-Transformer](https://github.com/microsof
 
 If you use this code in your research please consider citing
 ```
-@inproceedings{gao2022dfvt,
-  title={Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation},
-  author={Gao, Li and Nie, Dong and Li, Bo and Ren, Xiaofeng},
-  booktitle={Proceedings of the European Conference on Computer Vision},
-  year={2022}
+@InProceedings{10.1007/978-3-031-20050-2_43,
+author="Gao, Li
+and Nie, Dong
+and Li, Bo
+and Ren, Xiaofeng",
+title="Doubly-Fused ViT: Fuse Information from Vision Transformer Doubly with Local Representation",
+booktitle="Computer Vision -- ECCV 2022",
+year="2022",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="744--761",
+isbn="978-3-031-20050-2"
 }
 ```
 ## Other Links
